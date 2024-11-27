@@ -25,7 +25,7 @@ function AltaCine() {
             <Salas/>
             </Tab>
             <Tab eventKey="turnos" title="Turnos">
-              <Turnos/>>
+              <Turnos/>
             </Tab>
         </Tabs>
     );
