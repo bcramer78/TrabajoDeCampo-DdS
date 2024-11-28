@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Form, Container, Row, Col, Table, Button } from 'react-bootstrap'
 import { Trash2 } from 'lucide-react'
+import CancelarBtn from '../../components/buttons/CancelarBtn';
+import GuardarBtn from '../../components/buttons/GuardarBtn';
 
 const Turnos = () => {
     const [selectedTurno, setSelectedTurno] = useState('')
@@ -91,13 +93,9 @@ const Turnos = () => {
           </Table>
 
           <div className="d-flex justify-content-end gap-2">
-                <Button variant="primary" type="submit">
-                    Guardar
-                </Button>
-                <Button variant="secondary" type="button">
-                    Cancelar
-                </Button>
-            </div>
+            <GuardarBtn/>
+            <CancelarBtn/>
+          </div>
         </Container>
     )
 }

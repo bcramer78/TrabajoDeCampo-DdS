@@ -9,13 +9,11 @@ const BtnAltaCine = ({ children }) => {
     const handleMouseUp = () => setIsActive(false);
 
     const handleClick = () => {
-        console.log('Redirecting to /altaCine');
-        navigate('/altaCine');  // Redirige a la ruta de altaCine
+        navigate('/altaCine');  
     };
 
-
     return (
-        <div className='d-flex justify-content-center'>
+        <div className='d-flex justify-content-center mb-1'>
             <button 
                 onClick={handleClick} 
                 className={`rounded d-flex justify-content-center align-items-center mx-auto text-center w-100`} 

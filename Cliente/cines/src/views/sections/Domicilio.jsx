@@ -1,5 +1,7 @@
 import { Form, Container, Row, Col, Button } from 'react-bootstrap'
 import React from 'react';
+import CancelarBtn from '../../components/buttons/CancelarBtn';
+import GuardarBtn from '../../components/buttons/GuardarBtn';
 
 const Domicilio = () => {
     return (
@@ -41,12 +43,8 @@ const Domicilio = () => {
             </Form.Group>
 
             <div className="d-flex justify-content-end gap-2">
-                <Button variant="primary" type="submit">
-                    Guardar
-                </Button>
-                <Button variant="secondary" type="button">
-                    Cancelar
-                </Button>
+              <GuardarBtn/>
+              <CancelarBtn/>
             </div>
           </Form>
         </Container>
