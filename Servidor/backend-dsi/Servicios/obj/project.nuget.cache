@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "mfDOjuWMy5k=",
+  "dgSpecHash": "hvyikQqhJRk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\USUARIO\\source\\repos\\backend-dsi\\Servicios\\Servicios.csproj",
+  "projectFilePath": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Servicios.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\USUARIO\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\USUARIO\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
+    "C:\\Users\\USUARIO\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",
     "C:\\Users\\USUARIO\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\USUARIO\\.nuget\\packages\\microsoft.build.framework\\17.8.3\\microsoft.build.framework.17.8.3.nupkg.sha512",
     "C:\\Users\\USUARIO\\.nuget\\packages\\microsoft.build.locator\\1.7.8\\microsoft.build.locator.1.7.8.nupkg.sha512",
