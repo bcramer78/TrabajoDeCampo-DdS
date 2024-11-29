@@ -15,6 +15,9 @@ builder.Services.AddScoped<ICineService, CineService>();
 builder.Services.AddScoped<IDomicilioService, DomicilioService>();
 builder.Services.AddScoped<ILocalidadService, LocalidadService>();
 builder.Services.AddScoped<IProvinciaService, ProvinciaService>();
+builder.Services.AddScoped<ISalaService, SalaService>();
+builder.Services.AddScoped<ITurnoPrecioService, TurnoPrecioService>();
+builder.Services.AddScoped<ITurnoService, TurnoService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
