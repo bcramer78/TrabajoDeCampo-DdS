@@ -2,8 +2,16 @@ import React, {useState} from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
+import { useNavigate } from 'react-router-dom';
 
 const Cine = () =>{
+    const navigate = useNavigate(); 
+    const handleCancel = () => {
+       
+        navigate('/'); 
+        
+    };
+
     return (
         <Container className="mt-4">
         <Form>
@@ -29,7 +37,7 @@ const Cine = () =>{
 
             <div className="d-flex justify-content-end gap-2">
                 <GuardarBtn/>
-                <CancelarBtn/>
+                <CancelarBtn onClick={handleCancel}/>
             </div>
         </Form>
     </Container>

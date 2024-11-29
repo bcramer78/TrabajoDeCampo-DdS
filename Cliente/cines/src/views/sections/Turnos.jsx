@@ -3,7 +3,7 @@ import { Form, Container, Row, Col, Table, Button } from 'react-bootstrap'
 import { Trash2 } from 'lucide-react'
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 
 const Turnos = () => {
     const [selectedTurno, setSelectedTurno] = useState('')
@@ -34,6 +34,10 @@ const Turnos = () => {
     const handleClickTurno = () => {
       navigate('/altaTurno', { state: { from: 'turnos' } });  
     };
+
+    const handleCancel = () => {
+      window.location.reload();
+    }
 
     return (
         <Container className="mt-4">
@@ -110,10 +114,11 @@ const Turnos = () => {
 
           <div className="d-flex justify-content-end gap-2">
             <GuardarBtn/>
-            <CancelarBtn/>
+            <CancelarBtn onClick={handleCancel}/>
           </div>
         </Container>
     )
-}
+
+};
 
 export default Turnos;

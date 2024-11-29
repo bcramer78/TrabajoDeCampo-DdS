@@ -34,6 +34,10 @@ const Salas = () => {
     const handleClickSala = () => {
       navigate('/altaSala', { state: { from: 'salas' } });  
     };
+
+    const handleCancel = () => {
+      window.location.reload();
+    }
   
     return (
       <Container className="mt-4">
@@ -113,7 +117,7 @@ const Salas = () => {
 
         <div className="d-flex justify-content-end gap-2">
             <GuardarBtn/>
-            <CancelarBtn/>
+            <CancelarBtn onClick={handleCancel}/>
         </div>
       </Container>
     )

@@ -7,7 +7,6 @@ import Salas from './sections/Salas';
 import Turnos from './sections/Turnos';
 
 function AltaCine() {
-    console.log('Rendering AltaCine');
     return (
         <Tabs
           defaultActiveKey="home"

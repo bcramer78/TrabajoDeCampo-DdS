@@ -15,6 +15,11 @@ const Domicilio = () => {
       navigate('/altaLocalidad', { state: { from: 'domicilio' } })
     }
 
+    const handleCancel = () => {
+      window.location.reload();
+    }
+
+
     return (
         <Container className="mt-4">
           <Form>
@@ -77,7 +82,7 @@ const Domicilio = () => {
 
             <div className="d-flex justify-content-end gap-2">
               <GuardarBtn/>
-              <CancelarBtn/>
+              <CancelarBtn onClick={handleCancel}/>
             </div>
           </Form>
         </Container>
