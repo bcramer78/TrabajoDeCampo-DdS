@@ -22,7 +22,7 @@ const Cine = () =>{
                 </Col>
             </Row>
 
-            <Form.Group className="mb-4" controlId="formPhone">
+            <Form.Group className="mb-5" controlId="formPhone">
                 <Form.Label>Teléfono</Form.Label>
                 <Form.Control type="tel" />
             </Form.Group>

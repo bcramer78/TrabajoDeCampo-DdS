@@ -2,8 +2,19 @@ import React, {useState} from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import GuardarBtn from '../components/buttons/GuardarBtn';
 import CancelarBtn from '../components/buttons/CancelarBtn';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const AltaSala = () => {
+    const navigate = useNavigate(); 
+    const location = useLocation(); 
+    const handleCancel = () => {
+        if (location.state?.from === 'salas') {
+            navigate('/altaCine'); 
+        } else {
+            navigate('/'); 
+        }
+    };
+
     return (
         <div className='d-flex justify-content-center align-items-center w-100' style={{ height: '100vh' }}>
             <div className='d-flex flex-column align-items-center'>
@@ -30,7 +41,7 @@ const AltaSala = () => {
 
                         <div className="d-flex justify-content-end gap-2">
                             <GuardarBtn/>
-                            <CancelarBtn/>
+                            <CancelarBtn onClick={handleCancel}/>
                         </div>
     
                     </Form>

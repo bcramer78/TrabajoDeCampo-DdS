@@ -3,7 +3,7 @@ import { Form, Container, Row, Col, Table, Button } from 'react-bootstrap'
 import { Trash2 } from 'lucide-react'
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
-
+import { useNavigate } from 'react-router-dom';
 
 const Salas = () => {
     const [selectedSala, setSelectedSala] = useState('')
@@ -28,11 +28,17 @@ const Salas = () => {
     const handleDelete = (id) => {
       setItems(items.filter(item => item.id !== id))
     }
+
+    const navigate = useNavigate();
+
+    const handleClickSala = () => {
+      navigate('/altaSala', { state: { from: 'salas' } });  
+    };
   
     return (
       <Container className="mt-4">
         <Row className="mb-4 align-items-end">
-            <Col md={5}>
+            <Col md={4}>
                 <Form.Group controlId="formSala">
                 <Form.Label>Sala</Form.Label>
                 <Form.Select 
@@ -45,9 +51,18 @@ const Salas = () => {
                     <option value="sala3">Sala 3</option>
                 </Form.Select>
                 </Form.Group>
+
             </Col>
-            <Col md={5}>
-                <Form.Group controlId="formTipo">
+
+            <Col md={2}>
+                <Button 
+                variant="primary" 
+                onClick={handleClickSala}
+                className="w-20 mt-3"> + </Button>
+            </Col>
+            
+            <Col md={4}>
+                <Form.Group className="mt-3" controlId="formTipo">
                 <Form.Label>Tipo</Form.Label>
                 <Form.Select
                     value={selectedTipo}
@@ -65,7 +80,7 @@ const Salas = () => {
                 variant="primary" 
                 onClick={handleAdd}
                 disabled={!selectedSala || !selectedTipo}
-                className="w-20"> + </Button>
+                className="w-20 mt-3"> + </Button>
             </Col>
             </Row>
     

@@ -3,6 +3,7 @@ import { Form, Container, Row, Col, Table, Button } from 'react-bootstrap'
 import { Trash2 } from 'lucide-react'
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
+import { useNavigate } from 'react-router-dom';
 
 const Turnos = () => {
     const [selectedTurno, setSelectedTurno] = useState('')
@@ -27,10 +28,17 @@ const Turnos = () => {
       setItems(items.filter(item => item.id !== id))
     }
 
+    
+    const navigate = useNavigate();
+
+    const handleClickTurno = () => {
+      navigate('/altaTurno', { state: { from: 'turnos' } });  
+    };
+
     return (
         <Container className="mt-4">
           <Row className="mb-4 align-items-end">
-            <Col md={5}>
+            <Col md={4}>
               <Form.Group controlId="formTurno">
                 <Form.Label>Turno</Form.Label>
                 <Form.Select 
@@ -44,8 +52,16 @@ const Turnos = () => {
                 </Form.Select>
               </Form.Group>
             </Col>
-            <Col md={5}>
-              <Form.Group controlId="formPrecio">
+
+            <Col md={2}>
+                <Button 
+                variant="primary" 
+                onClick={handleClickTurno}
+                className="w-20 mt-3"> + </Button>
+            </Col>
+
+            <Col md={4}>
+              <Form.Group className="mt-3" controlId="formPrecio">
                 <Form.Label>Precio</Form.Label>
                 <Form.Control
                   type="number"
@@ -60,7 +76,7 @@ const Turnos = () => {
                 variant="primary" 
                 onClick={handleAdd}
                 disabled={!selectedTurno || !precio}
-                className="w-20"
+                className="w-20 mt-3"
               > + </Button>
             </Col>
           </Row>
