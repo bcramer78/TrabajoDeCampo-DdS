@@ -1,12 +1,34 @@
 import React from 'react';
+import {useState, useEffect} from 'react';
 import { Form, Container, Row, Col } from 'react-bootstrap';
 import GuardarBtn from '../components/buttons/GuardarBtn';
 import CancelarBtn from '../components/buttons/CancelarBtn';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { getProvincias } from '../helpers/provincia/provinciaService'
+import { useForm } from "react-hook-form";
 
 const AltaLocalidad = () => {
+    const [provincias, setProvincias] = useState([]);
+    const [error, setError] = useState('');
     const navigate = useNavigate(); 
     const location = useLocation(); 
+    const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
+
+    useEffect(() => {
+
+        async function ObtenerProvincias() {
+            try {
+                const response = await getProvincias(); 
+                setProvincias(response.data.datos);
+            } catch (error) {
+                console.error("Error al obtener las provincias:", error);
+                setError("Error al obtener los datos.");
+            }
+        }
+    
+        ObtenerProvincias();
+      }, []);
+
     const handleCancel = () => {
         if (location.state?.from === 'domicilio') {
             navigate('/altaCine'); 
@@ -30,15 +52,19 @@ const AltaLocalidad = () => {
                         </Row>
                         <Row className="mb-4">
                             <Col md={12}>
-                                <Form.Group  controlId="formProvince">
-                                <Form.Label>Provincia</Form.Label>
-                                <Form.Select>
-                                    <option value="">Seleccione una provincia</option>
-                                    <option value="buenosaires">Buenos Aires</option>
-                                    <option value="cordoba">Córdoba</option>
-                                    <option value="santafe">Santa Fe</option>
-                                </Form.Select>
-                                </Form.Group>
+                            <Form.Group controlId="provinciaId" className="mb-3">
+                            <Form.Label>Provincia</Form.Label>
+                            <Form.Select
+                                {...register("provinciaId")}
+                            >
+                            <option value="">Selecciona una provincia</option>
+                                {provincias.map((provincia) => (
+                                    <option key={provincia.id} value={provincia.id}>
+                                    {provincia.nombre} 
+                                    </option>
+                                ))}
+                            </Form.Select>
+                            </Form.Group>
                             </Col>
                         </Row>
                         <div className="d-flex justify-content-end gap-2">

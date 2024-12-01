@@ -1,11 +1,61 @@
+import {useState, useEffect} from 'react';
 import { Form, Container, Row, Col, Button } from 'react-bootstrap'
 import React from 'react';
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
 import { useNavigate } from 'react-router-dom';
+import { getProvincias } from '../../helpers/provincia/provinciaService'
+import { getLocalidades } from '../../helpers/localidad/localidadService'
+import { useForm } from "react-hook-form";
 
 const Domicilio = () => {
+    const [provincias, setProvincias] = useState([]);
+    const [localidades, setLocalidades] = useState([]);
+    const [filteredLocalidades, setFilteredLocalidades] = useState([]);
+    const [selectedProvincia, setSelectedProvincia] = useState("");
+    const [error, setError] = useState('');
+    const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
     const navigate = useNavigate();
+
+    useEffect(() => {
+
+      async function ObtenerProvincias() {
+          try {
+              const response = await getProvincias(); 
+              setProvincias(response.data.datos);
+          } catch (error) {
+              console.error("Error al obtener las provincias:", error);
+              setError("Error al obtener los datos.");
+          }
+      }
+  
+      ObtenerProvincias();
+    }, []);
+
+    useEffect(() => {
+
+      async function ObtenerLocalidades() {
+          try {
+              const response = await getLocalidades(); 
+              setLocalidades(response.data.datos);
+          } catch (error) {
+              console.error("Error al obtener las localidades:", error);
+              setError("Error al obtener los datos.");
+          }
+      }
+  
+      ObtenerLocalidades();
+    }, []);
+
+    const handleProvinciaChange = (e) => {
+
+      const provinciaId = e.target.value;
+      setSelectedProvincia(provinciaId);
+  
+      const filtradas = localidades.filter(localidad => String(localidad.provinciaId) === provinciaId);
+      setFilteredLocalidades(filtradas);
+
+    };
 
     const handleClickProvincia = () => {
       navigate('/altaProvincia', { state: { from: 'domicilio' } });  
@@ -40,14 +90,19 @@ const Domicilio = () => {
 
             <Row className="mb-4 align-items-end">
               <Col md={10}>
-                <Form.Group  controlId="formProvince">
-                  <Form.Label>Provincia</Form.Label>
-                  <Form.Select>
-                    <option value="">Seleccione una provincia</option>
-                    <option value="buenosaires">Buenos Aires</option>
-                    <option value="cordoba">Córdoba</option>
-                    <option value="santafe">Santa Fe</option>
-                  </Form.Select>
+                <Form.Group controlId="provinciaId" className="mb-3">
+                <Form.Label>Provincia</Form.Label>
+                <Form.Select
+                    {...register("provinciaId")}
+                    onChange={handleProvinciaChange}
+                >
+                <option value="">Selecciona una provincia</option>
+                    {provincias.map((provincia) => (
+                        <option key={provincia.id} value={provincia.id}>
+                        {provincia.nombre} 
+                        </option>
+                    ))}
+                </Form.Select>
                 </Form.Group>
               </Col>
     
@@ -61,15 +116,19 @@ const Domicilio = () => {
 
             <Row className="mb-5 align-items-end">
               <Col md={10}>
-                  <Form.Group controlId="formLocation">
-                    <Form.Label>Localidad</Form.Label>
-                    <Form.Select>
-                      <option value="">Seleccione una localidad</option>
-                      <option value="loc1">Localidad 1</option>
-                      <option value="loc2">Localidad 2</option>
-                      <option value="loc3">Localidad 3</option>
-                    </Form.Select>
-                  </Form.Group>
+              <Form.Group controlId="localidadId">
+                <Form.Label>Localidad</Form.Label>
+                <Form.Select
+                  {...register("localidadId")}
+                >
+                  <option value="">Seleccione una localidad</option>
+                  {filteredLocalidades.map((localidad) => (
+                    <option key={localidad.id} value={localidad.id}>
+                      {localidad.nombre}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
               </Col>
     
               <Col md={2}>

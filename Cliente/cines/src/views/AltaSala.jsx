@@ -3,10 +3,17 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import GuardarBtn from '../components/buttons/GuardarBtn';
 import CancelarBtn from '../components/buttons/CancelarBtn';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { getCines } from '../helpers/cine/cineService'
+import { useForm } from "react-hook-form";
 
 const AltaSala = () => {
+    const [mostrarComponente, setMostrarComponente] = useState(true);
+    const [cines, setCines] = useState([]);
+    const [error, setError] = useState('');
     const navigate = useNavigate(); 
     const location = useLocation(); 
+    const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
+
     const handleCancel = () => {
         if (location.state?.from === 'salas') {
             navigate('/altaCine'); 
@@ -14,8 +21,6 @@ const AltaSala = () => {
             navigate('/'); 
         }
     };
-
-    const [mostrarComponente, setMostrarComponente] = useState(true);
 
     useEffect(() => {
         if (location.state?.from === 'salas') {
@@ -25,8 +30,6 @@ const AltaSala = () => {
         }
     }, [location.state]); 
 
-    const [cines, setCines] = useState([]);
-
     useEffect(() => {
 
         async function ObtenerCines() {
@@ -34,12 +37,12 @@ const AltaSala = () => {
                 const response = await getCines(); 
                 setCines(response.data.datos);
             } catch (error) {
-                console.error("Error al obtener los salones:", error);
+                console.error("Error al obtener los cines:", error);
                 setError("Error al obtener los datos.");
             }
         }
     
-        ObtenerSalones();
+        ObtenerCines();
       }, []);
 
 
@@ -68,11 +71,18 @@ const AltaSala = () => {
                         </Form.Group>
 
                         {mostrarComponente ?
-                            <Form.Group className="mb-5" controlId="formProvince">
-                                <Form.Label>Cine</Form.Label>
-                                <Form.Select>
-                                    <option value="">Seleccione el cine</option>
-                                </Form.Select>
+                            <Form.Group controlId="cineId" className="mb-3">
+                            <Form.Label>Cine</Form.Label>
+                            <Form.Select
+                                {...register("cineId")}
+                            >
+                            <option value="">Selecciona un cine</option>
+                                {cines.map((cine) => (
+                                    <option key={cine.id} value={cine.id}>
+                                    {cine.nombre} 
+                                    </option>
+                                ))}
+                            </Form.Select>
                             </Form.Group>
                         : null}
 

@@ -1,21 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Container, Row, Col, Table, Button } from 'react-bootstrap'
 import { Trash2 } from 'lucide-react'
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
 import { useNavigate} from 'react-router-dom';
+import { getTurnos } from '../../helpers/turno/turnoService'
+import { useForm } from "react-hook-form";
 
 const Turnos = () => {
+    const [turnos, setTurnos] = useState([]);
+    const [error, setError] = useState('');
     const [selectedTurno, setSelectedTurno] = useState('')
     const [precio, setPrecio] = useState('')
     const [items, setItems] = useState([])
+    const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
+
+    useEffect(() => {
+
+      async function ObtenerTurnos() {
+          try {
+              const response = await getTurnos(); 
+              setTurnos(response.data.datos);
+          } catch (error) {
+              console.error("Error al obtener los turnos:", error);
+              setError("Error al obtener los datos.");
+          }
+      }
+  
+      ObtenerTurnos();
+    }, []);
   
     const handleAdd = () => {
       if (selectedTurno && precio) {
+        const turnoSeleccionado = turnos.find(turno => String(turno.id) === selectedTurno);
         setItems([
           ...items,
           {
-            turno: selectedTurno,
+            id: turnoSeleccionado.id,
+            turno: turnoSeleccionado.tipo,
             precio: precio
           }
         ])
@@ -43,16 +65,19 @@ const Turnos = () => {
         <Container className="mt-4">
           <Row className="mb-4 align-items-end">
             <Col md={4}>
-              <Form.Group controlId="formTurno">
+              <Form.Group controlId="turnoId">
                 <Form.Label>Turno</Form.Label>
                 <Form.Select 
+                  {...register("turnoId")}
                   value={selectedTurno}
                   onChange={(e) => setSelectedTurno(e.target.value)}
                 >
-                  <option value="">Seleccione un turno</option>
-                  <option value="mañana">Mañana</option>
-                  <option value="tarde">Tarde</option>
-                  <option value="noche">Noche</option>
+                  <option value="">Selecciona un turno</option>
+                  {turnos.map((turno) => (
+                      <option key={turno.id} value={turno.id}>
+                      {turno.tipo} 
+                      </option>
+                  ))}
                 </Form.Select>
               </Form.Group>
             </Col>

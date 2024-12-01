@@ -1,21 +1,43 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Form, Container, Row, Col, Table, Button } from 'react-bootstrap'
 import { Trash2 } from 'lucide-react'
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
 import { useNavigate } from 'react-router-dom';
+import { getSalas } from '../../helpers/sala/salaService'
+import { useForm } from "react-hook-form";
 
 const Salas = () => {
+    const [salas, setSalas] = useState([]);
+    const [error, setError] = useState('');
     const [selectedSala, setSelectedSala] = useState('')
     const [selectedTipo, setSelectedTipo] = useState('')
     const [items, setItems] = useState([])
+    const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
+
+    useEffect(() => {
+
+      async function ObtenerSalas() {
+          try {
+              const response = await getSalas(); 
+              setSalas(response.data.datos);
+          } catch (error) {
+              console.error("Error al obtener las salas:", error);
+              setError("Error al obtener los datos.");
+          }
+      }
+  
+      ObtenerSalas();
+    }, []);
   
     const handleAdd = () => {
       if (selectedSala && selectedTipo) {
+        const salaSeleccionada = salas.find(sala => String(sala.id) === selectedSala);
         setItems([
           ...items,
           {
-            sala: selectedSala,
+            id: salaSeleccionada.id,
+            sala: salaSeleccionada.numero,
             tipo: selectedTipo
           }
         ])
@@ -43,16 +65,19 @@ const Salas = () => {
       <Container className="mt-4">
         <Row className="mb-4 align-items-end">
             <Col md={4}>
-                <Form.Group controlId="formSala">
+                <Form.Group controlId="salaId">
                 <Form.Label>Sala</Form.Label>
                 <Form.Select 
+                    {...register("salaId")}
                     value={selectedSala}
                     onChange={(e) => setSelectedSala(e.target.value)}
                 >
-                    <option value="">Seleccione una sala</option>
-                    <option value="sala1">Sala 1</option>
-                    <option value="sala2">Sala 2</option>
-                    <option value="sala3">Sala 3</option>
+                    <option value="">Selecciona una sala</option>
+                    {salas.map((sala) => (
+                        <option key={sala.id} value={sala.id}>
+                        {sala.numero} 
+                        </option>
+                    ))}
                 </Form.Select>
                 </Form.Group>
 
@@ -73,9 +98,9 @@ const Salas = () => {
                     onChange={(e) => setSelectedTipo(e.target.value)}
                 >
                     <option value="">Seleccione un tipo</option>
-                    <option value="tipo1">Tipo 1</option>
-                    <option value="tipo2">Tipo 2</option>
-                    <option value="tipo3">Tipo 3</option>
+                    <option value="2D">2D</option>
+                    <option value="3D">3D</option>
+                    <option value="4D">4D</option>
                 </Form.Select>
                 </Form.Group>
             </Col>
