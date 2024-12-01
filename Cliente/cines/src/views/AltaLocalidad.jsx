@@ -20,11 +20,24 @@ const AltaLocalidad = () => {
             <div className='d-flex flex-column align-items-center'>
                 <Container className="mt-4">
                     <Form>
-                        <Row className="mb-4">
+                        <Row className="mb-3">
                             <Col md={12}>
                                 <Form.Group controlId="formName">
                                     <Form.Label>Nombre</Form.Label>
                                     <Form.Control type="text" />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row className="mb-4 align-items-end">
+                            <Col md={10}>
+                                <Form.Group  controlId="formProvince">
+                                <Form.Label>Provincia</Form.Label>
+                                <Form.Select>
+                                    <option value="">Seleccione una provincia</option>
+                                    <option value="buenosaires">Buenos Aires</option>
+                                    <option value="cordoba">Córdoba</option>
+                                    <option value="santafe">Santa Fe</option>
+                                </Form.Select>
                                 </Form.Group>
                             </Col>
                         </Row>
