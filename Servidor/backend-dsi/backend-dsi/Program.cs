@@ -1,5 +1,7 @@
 using DataBase.Data;
 using Microsoft.EntityFrameworkCore;
+using Servicios.Interfaces;
+using Servicios.Servicios;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,13 @@ builder.Services.AddDbContext<dsiContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<ICineService, CineService>();
+builder.Services.AddScoped<IDomicilioService, DomicilioService>();
+builder.Services.AddScoped<ILocalidadService, LocalidadService>();
+builder.Services.AddScoped<IProvinciaService, ProvinciaService>();
+builder.Services.AddScoped<ISalaService, SalaService>();
+builder.Services.AddScoped<ITurnoPrecioService, TurnoPrecioService>();
+builder.Services.AddScoped<ITurnoService, TurnoService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
