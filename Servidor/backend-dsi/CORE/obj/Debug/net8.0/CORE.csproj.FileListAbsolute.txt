@@ -1,0 +1,14 @@
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\bin\Debug\net8.0\CORE.deps.json
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\bin\Debug\net8.0\CORE.runtimeconfig.json
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\bin\Debug\net8.0\CORE.dll
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\bin\Debug\net8.0\CORE.pdb
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\obj\Debug\net8.0\CORE.csproj.AssemblyReference.cache
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\obj\Debug\net8.0\CORE.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\obj\Debug\net8.0\CORE.AssemblyInfoInputs.cache
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\obj\Debug\net8.0\CORE.AssemblyInfo.cs
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\obj\Debug\net8.0\CORE.csproj.CoreCompileInputs.cache
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\obj\Debug\net8.0\CORE.dll
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\obj\Debug\net8.0\refint\CORE.dll
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\obj\Debug\net8.0\CORE.pdb
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\obj\Debug\net8.0\CORE.genruntimeconfig.cache
+C:\Users\USUARIO\source\repos\backend-dsi\CORE\obj\Debug\net8.0\ref\CORE.dll

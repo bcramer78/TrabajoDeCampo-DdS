@@ -28,8 +28,8 @@ const AltaLocalidad = () => {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        <Row className="mb-4 align-items-end">
-                            <Col md={10}>
+                        <Row className="mb-4">
+                            <Col md={12}>
                                 <Form.Group  controlId="formProvince">
                                 <Form.Label>Provincia</Form.Label>
                                 <Form.Select>
