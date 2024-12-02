@@ -78,6 +78,13 @@ namespace Servicios.Servicios
                     return respuesta;
                 }
 
+                var telefonoExistente = await _context.Cines.FirstOrDefaultAsync(x => x.Telefono == cineDTO.Telefono);
+                if (telefonoExistente != null)
+                {
+                    respuesta.Mensaje = "El teléfono ya está asociado a otro cine";
+                    return respuesta;
+                }
+
                 //var cineNuevo = cineDTO.Adapt<Cine>();
                 var cineNuevo = new Cine();
                 cineNuevo.Nombre = cineDTO.Nombre;
@@ -152,6 +159,13 @@ namespace Servicios.Servicios
                     if (cineExistente != null)
                     {
                         respuesta.Mensaje = "El domicilio ya está asociado a otro cine";
+                        return respuesta;
+                    }
+
+                    var telefonoExistente = await _context.Cines.FirstOrDefaultAsync(x => x.Telefono == cineDTO.Telefono && x.Id != id);
+                    if (telefonoExistente != null)
+                    {
+                        respuesta.Mensaje = "El teléfono ya está asociado a otro cine";
                         return respuesta;
                     }
 
