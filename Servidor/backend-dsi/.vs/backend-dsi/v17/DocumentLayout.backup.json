@@ -48,7 +48,7 @@
               "RelativeDocumentMoniker": "Servicios\\Servicios\\CineService.cs",
               "ToolTip": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Servicios\\CineService.cs",
               "RelativeToolTip": "Servicios\\Servicios\\CineService.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAiwFAAAAB1AAAAAAAAAA==",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAAAFMAAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-02T17:51:23.503Z",
               "EditorCaption": ""
@@ -75,8 +75,7 @@
               "RelativeToolTip": "backend-dsi\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC8AAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-29T18:13:46.462Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-29T18:13:46.462Z"
             },
             {
               "$type": "Document",

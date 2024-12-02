@@ -10,7 +10,6 @@ import { useForm } from "react-hook-form";
 const Salas = () => {
     const [salas, setSalas] = useState([]);
     const [error, setError] = useState('');
-    const [selectedSala, setSelectedSala] = useState('')
     const [selectedTipo, setSelectedTipo] = useState('')
     const [items, setItems] = useState([])
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
@@ -19,11 +18,11 @@ const Salas = () => {
 
       async function ObtenerSalas() {
           try {
-              const response = await getSalas(); 
-              setSalas(response.data.datos);
+            const response = await getSalas(); 
+            setSalas(response.data.datos);
           } catch (error) {
-              console.error("Error al obtener las salas:", error);
-              setError("Error al obtener los datos.");
+            console.error("Error al obtener las salas:", error);
+            setError("Error al obtener los datos.");
           }
       }
   
@@ -31,31 +30,27 @@ const Salas = () => {
     }, []);
   
     const handleAdd = () => {
-      if (selectedSala && selectedTipo) {
-        const salaSeleccionada = salas.find(sala => String(sala.id) === selectedSala);
+      if (selectedTipo) {
+        // Combina salas existentes y temporales para encontrar el último número de sala.
+        const allSalas = [...salas, ...items];
+        const lastSalaNumber = Math.max(...allSalas.map(sala => sala.numero || sala.sala), 0); // "numero" para `salas` y "sala" para `items`
+        const newSalaNumber = lastSalaNumber + 1; // Incrementa para el nuevo número de sala.
+    
         setItems([
           ...items,
           {
-            id: salaSeleccionada.id,
-            sala: salaSeleccionada.numero,
+            id: newSalaNumber, // ID único para esta tabla local
+            sala: newSalaNumber, // Número de sala
             tipo: selectedTipo
           }
-        ])
-        // Reset selections
-        setSelectedSala('')
-        setSelectedTipo('')
+        ]);
+        setSelectedTipo(''); // Limpia el campo de selección
       }
-    }
+    };
   
     const handleDelete = (id) => {
       setItems(items.filter(item => item.id !== id))
     }
-
-    const navigate = useNavigate();
-
-    const handleClickSala = () => {
-      navigate('/altaSala', { state: { from: 'salas' } });  
-    };
 
     const handleCancel = () => {
       window.location.reload();
@@ -64,32 +59,6 @@ const Salas = () => {
     return (
       <Container className="mt-4">
         <Row className="mb-4 align-items-end">
-            <Col md={4}>
-                <Form.Group controlId="salaId">
-                <Form.Label>Sala</Form.Label>
-                <Form.Select 
-                    {...register("salaId")}
-                    value={selectedSala}
-                    onChange={(e) => setSelectedSala(e.target.value)}
-                >
-                    <option value="">Selecciona una sala</option>
-                    {salas.map((sala) => (
-                        <option key={sala.id} value={sala.id}>
-                        {sala.numero} 
-                        </option>
-                    ))}
-                </Form.Select>
-                </Form.Group>
-
-            </Col>
-
-            <Col md={2}>
-                <Button 
-                variant="primary" 
-                onClick={handleClickSala}
-                className="w-20 mt-3"> + </Button>
-            </Col>
-            
             <Col md={4}>
                 <Form.Group className="mt-3" controlId="formTipo">
                 <Form.Label>Tipo</Form.Label>
@@ -100,7 +69,7 @@ const Salas = () => {
                     <option value="">Seleccione un tipo</option>
                     <option value="2D">2D</option>
                     <option value="3D">3D</option>
-                    <option value="4D">4D</option>
+                    <option value="HD">HD</option>
                 </Form.Select>
                 </Form.Group>
             </Col>
@@ -108,7 +77,7 @@ const Salas = () => {
                 <Button 
                 variant="primary" 
                 onClick={handleAdd}
-                disabled={!selectedSala || !selectedTipo}
+                disabled={!selectedTipo}
                 className="w-20 mt-3"> + </Button>
             </Col>
             </Row>

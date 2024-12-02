@@ -9,14 +9,10 @@ const GuardarBtn = () => {
     const handleMouseDown = () => setIsActive(true);
     const handleMouseUp = () => setIsActive(false);
 
-    const handleClick = () => {
-        navigate('/');  
-    };
 
     return (
         <div className='d-flex justify-content-center'>
             <Button 
-                onClick={handleClick} 
                 onMouseDown={handleMouseDown} 
                 onMouseUp={handleMouseUp}
                 variant="primary" 

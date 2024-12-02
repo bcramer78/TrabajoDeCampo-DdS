@@ -3,12 +3,15 @@ import { Form, Container, Row, Col, Button } from 'react-bootstrap'
 import React from 'react';
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { getProvincias } from '../../helpers/provincia/provinciaService'
 import { getLocalidades } from '../../helpers/localidad/localidadService'
+import { createDomicilio } from '../../helpers/domicilio/domicilioService'
 import { useForm } from "react-hook-form";
 
-const Domicilio = () => {
+const Domicilio = ({ cineData }) => {
+    const location = useLocation();
+    const { nombre, numero, telefono } = location.state || {};
     const [provincias, setProvincias] = useState([]);
     const [localidades, setLocalidades] = useState([]);
     const [filteredLocalidades, setFilteredLocalidades] = useState([]);
@@ -16,6 +19,8 @@ const Domicilio = () => {
     const [error, setError] = useState('');
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
     const navigate = useNavigate();
+
+    console.log("Datos recibidos en Domicilio:", cineData);
 
     useEffect(() => {
 
@@ -69,6 +74,17 @@ const Domicilio = () => {
       window.location.reload();
     }
 
+    const onSubmit = async (data) => {
+      try {
+          const response = await createDomicilio(data); 
+          console.log('Domicilio creado exitosamente:', response.data);
+          navigate('/'); // Navega a la página principal o muestra un mensaje de éxito
+      } catch (error) {
+          console.error('Error al crear el domicilio:', error);
+          setError('Error al crear el domicilio.');
+      }
+    };
+
 
     return (
         <Container className="mt-4">
@@ -77,13 +93,19 @@ const Domicilio = () => {
               <Col md={6}>
                 <Form.Group controlId="formStreet">
                   <Form.Label>Calle</Form.Label>
-                  <Form.Control type="text" />
+                  <Form.Control 
+                    type="text"
+                    {...register('calle', { required: 'La calle es requerida' })}
+                   />
                 </Form.Group>
               </Col>
               <Col md={6}>
                 <Form.Group controlId="formNumber">
                   <Form.Label>Numero</Form.Label>
-                  <Form.Control type="text" />
+                  <Form.Control 
+                    type="text"
+                    {...register('numero', { required: 'El número es requerido' })}
+                  />
                 </Form.Group>
               </Col>
             </Row>
@@ -93,7 +115,7 @@ const Domicilio = () => {
                 <Form.Group controlId="provinciaId" className="mb-3">
                 <Form.Label>Provincia</Form.Label>
                 <Form.Select
-                    {...register("provinciaId")}
+                    {...register('provinciaId', { required: 'La provincia es requerida' })}
                     onChange={handleProvinciaChange}
                 >
                 <option value="">Selecciona una provincia</option>
@@ -119,7 +141,7 @@ const Domicilio = () => {
               <Form.Group controlId="localidadId">
                 <Form.Label>Localidad</Form.Label>
                 <Form.Select
-                  {...register("localidadId")}
+                  {...register('localidadId', { required: 'La localidad es requerida' })}
                 >
                   <option value="">Seleccione una localidad</option>
                   {filteredLocalidades.map((localidad) => (
