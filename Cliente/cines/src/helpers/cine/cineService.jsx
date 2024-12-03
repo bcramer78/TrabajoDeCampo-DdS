@@ -42,3 +42,14 @@ export async function updateCine(cineId, cineData) {
         throw new Error(error.response.data.mensaje);
     } 
 };
+
+// GET: Obtener ID del cine
+export async function obtenerCineId(nombre) { 
+    try {
+        const response = await axios.get(`https://localhost:7297/api/Cine/obtenerCineId?nombre=${nombre}`);
+        return response;
+    } catch (error) {
+        console.log("Este es el error al obtener el cine: ", error.response.data.mensaje);
+        throw new Error(error.response.data.mensaje);
+    }
+};

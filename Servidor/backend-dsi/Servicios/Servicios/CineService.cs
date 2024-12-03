@@ -190,5 +190,34 @@ namespace Servicios.Servicios
                 return respuesta;
             }
         }
+
+        public async Task<RespuestaPrivada<int>> GetCineIdByNombre(string nombre)
+        {
+            var respuesta = new RespuestaPrivada<int>();
+            respuesta.Datos = 0; 
+
+            try
+            {
+                var cineBD = await _context.Cines.FirstOrDefaultAsync(c => c.Nombre == nombre);
+
+                if (cineBD != null)
+                {
+                    respuesta.Datos = cineBD.Id;  
+                    respuesta.Exito = true;
+                    respuesta.Mensaje = "Cine encontrado correctamente";
+                }
+                else
+                {
+                    respuesta.Mensaje = "No se encontró un cine con ese nombre";
+                }
+            }
+            catch (Exception ex)
+            {
+                respuesta.Mensaje = "Error interno: " + ex.Message;
+            }
+
+            return respuesta;
+        }
+
     }
 }

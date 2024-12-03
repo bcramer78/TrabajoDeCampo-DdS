@@ -3,9 +3,11 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap'
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
 import { useNavigate } from 'react-router-dom';
+import { createCine, obtenerCineId } from '../../helpers/cine/cineService'
 
-const Cine = ({ cineData, setCineData, onGuardar }) =>{
+const Cine = ({ cineData, setCineData, onGuardar, domicilioId, setCineId }) =>{
     const navigate = useNavigate();
+    console.log("Estoy en la seccion cine, id del domicilio: ", domicilioId);
 
     const handleCancel = () => {
        
@@ -13,10 +15,33 @@ const Cine = ({ cineData, setCineData, onGuardar }) =>{
         
     };
 
-    const handleGuardar = () => {
-        const cineData = { nombre, numero, telefono };
-        onGuardar(cineData); // Llama a la función pasada por props con los datos del cine
-    };
+    const handleGuardar = async () => {
+        const { nombre, numero, telefono } = cineData;
+    
+        if (nombre && numero && telefono && domicilioId) {
+            const cineWithDomicilio = { ...cineData, domicilioId };
+
+            try {
+                const response = await createCine(cineWithDomicilio);
+                console.log('Cine creado exitosamente:', response);
+
+                const cineIdResponse = await obtenerCineId(cineWithDomicilio.nombre);
+                if (cineIdResponse?.data?.datos) {
+                    const cineId = cineIdResponse.data.datos;
+                    setCineId(cineId);  
+                    console.log('Estoy en la seccion cine, id', cineId);
+                }
+                onGuardar(cineData); 
+            } catch (error) {
+                console.error('Error al crear el cine:', error);
+                alert('Hubo un error al guardar el cine');
+            }
+
+             
+        } else {
+          alert("Por favor, complete todos los campos antes de guardar.");
+        }
+      };
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -59,7 +84,9 @@ const Cine = ({ cineData, setCineData, onGuardar }) =>{
             </Form.Group>
 
             <div className="d-flex justify-content-end gap-2">
-                <GuardarBtn />
+                <Button variant="primary" onClick={handleGuardar}>
+                    Guardar
+                </Button>
                 <CancelarBtn onClick={handleCancel}/>
             </div>
         </Form>

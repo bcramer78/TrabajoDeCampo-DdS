@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("backend-dsi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ffd73e4fc4b1a6ed6812273b2e663af85ea82894")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+eeb157e032ce9217537cb832809b7a27b0e528de")]
 [assembly: System.Reflection.AssemblyProductAttribute("backend-dsi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("backend-dsi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

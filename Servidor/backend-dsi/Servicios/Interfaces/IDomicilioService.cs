@@ -9,5 +9,6 @@ namespace Servicios.Interfaces
         Task<RespuestaPrivada<DomicilioDTO>> PostDomicilio(DomicilioDTO domicilioDTO);
         Task<RespuestaPrivada<Domicilio>> DeleteDomicilio(int id);
         Task<RespuestaPrivada<DomicilioDTO>> PutDomicilio(int id, DomicilioDTO domicilioDTO);
+        Task<RespuestaPrivada<int>> GetDomicilioId(int calle, int numero);
     }
 }

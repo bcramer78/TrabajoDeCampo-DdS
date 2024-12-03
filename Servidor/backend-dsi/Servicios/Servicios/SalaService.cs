@@ -93,14 +93,14 @@ namespace Servicios.Servicios
         }
 
         //baja 
-        public async Task<RespuestaPrivada<Sala>> DeleteSala(int id)
+        public async Task<RespuestaPrivada<Sala>> DeleteSala(int numeroSala)
         {
             var respuesta = new RespuestaPrivada<Sala>();
             respuesta.Datos = null;
 
             try
             {
-                var salaBD = await _context.Salas.FindAsync(id);
+                var salaBD = await _context.Salas.FirstOrDefaultAsync(s => s.Numero == numeroSala);
                 if (salaBD != null)
                 {
                     _context.Salas.Remove(salaBD);

@@ -7,13 +7,15 @@ import { useNavigate} from 'react-router-dom';
 import { getTurnos } from '../../helpers/turno/turnoService'
 import { useForm } from "react-hook-form";
 
-const Turnos = () => {
+const Turnos = ({cineId}) => {
     const [turnos, setTurnos] = useState([]);
     const [error, setError] = useState('');
     const [selectedTurno, setSelectedTurno] = useState('')
     const [precio, setPrecio] = useState('')
     const [items, setItems] = useState([])
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
+
+    console.log("Estoy en la seccion turnos, id del cine: ", cineId);
 
     useEffect(() => {
 

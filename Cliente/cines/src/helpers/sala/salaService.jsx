@@ -23,9 +23,9 @@ export async function createSala(nuevaSala) {
 };
 
 //DELETE
-export async function deleteSala(salaId) {
+export async function deleteSala(salaNum) {
     try {
-        const response = await axios.delete(`https://localhost:7297/api/Sala/eliminarSala?id=${salaId}`);
+        const response = await axios.delete(`https://localhost:7297/api/Sala/eliminarSala?numeroSala=${salaNum}`);
         return response;
     } catch (error) {
         throw new Error(error.response.data.mensaje);

@@ -3,15 +3,13 @@ import { Form, Container, Row, Col, Button } from 'react-bootstrap'
 import React from 'react';
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getProvincias } from '../../helpers/provincia/provinciaService'
 import { getLocalidades } from '../../helpers/localidad/localidadService'
-import { createDomicilio } from '../../helpers/domicilio/domicilioService'
+import { createDomicilio, obtenerDomicilioId } from '../../helpers/domicilio/domicilioService'
 import { useForm } from "react-hook-form";
 
-const Domicilio = ({ cineData }) => {
-    const location = useLocation();
-    const { nombre, numero, telefono } = location.state || {};
+const Domicilio = ({ onGuardar, setDomicilioId  }) => {
     const [provincias, setProvincias] = useState([]);
     const [localidades, setLocalidades] = useState([]);
     const [filteredLocalidades, setFilteredLocalidades] = useState([]);
@@ -19,8 +17,6 @@ const Domicilio = ({ cineData }) => {
     const [error, setError] = useState('');
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
     const navigate = useNavigate();
-
-    console.log("Datos recibidos en Domicilio:", cineData);
 
     useEffect(() => {
 
@@ -71,14 +67,30 @@ const Domicilio = ({ cineData }) => {
     }
 
     const handleCancel = () => {
-      window.location.reload();
+      navigate('/');
     }
 
     const onSubmit = async (data) => {
       try {
-          const response = await createDomicilio(data); 
-          console.log('Domicilio creado exitosamente:', response.data);
-          navigate('/'); // Navega a la página principal o muestra un mensaje de éxito
+          const formattedData = {
+            ...data,
+            calle: parseInt(data.calle, 10), 
+            numero: parseInt(data.numero, 10), 
+            localidadId: parseInt(data.localidadId, 10), 
+          };
+
+          const response = await createDomicilio(formattedData); 
+          console.log('Domicilio creado exitosamente:', response);
+          
+
+          const domicilioIdResponse = await obtenerDomicilioId(formattedData.calle, formattedData.numero);
+            if (domicilioIdResponse?.data?.datos) {
+                const domicilioId = domicilioIdResponse.data.datos;
+                setDomicilioId(domicilioId);  
+                console.log('Estoy en la seccion domicilio, id', domicilioId);
+            }
+          
+          onGuardar();
       } catch (error) {
           console.error('Error al crear el domicilio:', error);
           setError('Error al crear el domicilio.');
@@ -88,7 +100,7 @@ const Domicilio = ({ cineData }) => {
 
     return (
         <Container className="mt-4">
-          <Form>
+          <Form onSubmit={handleSubmit(onSubmit)}>
             <Row className="mb-3">
               <Col md={6}>
                 <Form.Group controlId="formStreet">

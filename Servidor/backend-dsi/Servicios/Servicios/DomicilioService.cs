@@ -159,5 +159,35 @@ namespace Servicios.Servicios
                 return respuesta;
             }
         }
+
+        public async Task<RespuestaPrivada<int>> GetDomicilioId(int calle, int numero)
+        {
+            var respuesta = new RespuestaPrivada<int>();
+            respuesta.Datos = 0; 
+
+            try
+            {
+                var domicilioBD = await _context.Domicilios
+                    .FirstOrDefaultAsync(d => d.Calle == calle && d.Numero == numero);
+
+                if (domicilioBD != null)
+                {
+                    respuesta.Datos = domicilioBD.Id; // Retorna el ID del domicilio
+                    respuesta.Exito = true;
+                    respuesta.Mensaje = "Domicilio encontrado correctamente";
+                }
+                else
+                {
+                    respuesta.Mensaje = "No se encontró un domicilio con esa calle y número";
+                }
+            }
+            catch (Exception ex)
+            {
+                respuesta.Mensaje = "Error interno: " + ex.Message;
+            }
+
+            return respuesta;
+        }
+
     }
 }

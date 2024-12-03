@@ -4,116 +4,140 @@ import { Trash2 } from 'lucide-react'
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
 import { useNavigate } from 'react-router-dom';
-import { getSalas } from '../../helpers/sala/salaService'
 import { useForm } from "react-hook-form";
+import { createSala, deleteSala } from '../../helpers/sala/salaService'
 
-const Salas = () => {
-    const [salas, setSalas] = useState([]);
+const Salas = ({cineId}) => {
     const [error, setError] = useState('');
     const [selectedTipo, setSelectedTipo] = useState('')
     const [items, setItems] = useState([])
     const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
-
-    useEffect(() => {
-
-      async function ObtenerSalas() {
-          try {
-            const response = await getSalas(); 
-            setSalas(response.data.datos);
-          } catch (error) {
-            console.error("Error al obtener las salas:", error);
-            setError("Error al obtener los datos.");
-          }
-      }
+    const navigate = useNavigate();
   
-      ObtenerSalas();
-    }, []);
-  
-    const handleAdd = () => {
-      if (selectedTipo) {
-        // Combina salas existentes y temporales para encontrar el último número de sala.
-        const allSalas = [...salas, ...items];
-        const lastSalaNumber = Math.max(...allSalas.map(sala => sala.numero || sala.sala), 0); // "numero" para `salas` y "sala" para `items`
-        const newSalaNumber = lastSalaNumber + 1; // Incrementa para el nuevo número de sala.
+    const onSubmit = async (data) => {
     
-        setItems([
-          ...items,
-          {
-            id: newSalaNumber, // ID único para esta tabla local
-            sala: newSalaNumber, // Número de sala
-            tipo: selectedTipo
-          }
-        ]);
-        setSelectedTipo(''); // Limpia el campo de selección
+      const numeroSala = parseInt(data.numeroSala, 10);
+      console.log("Datos enviados:", { numeroSala, tipo: data.tipo, cineId });
+
+      const nuevaSala = {
+          numero: data.numeroSala, 
+          tipo: data.tipo,
+          cineId: cineId
+      };
+
+      
+
+      try {
+          const response = await createSala(nuevaSala); // Llamada a la API para guardar en la base de datos
+          setItems(prevItems => [
+              ...prevItems,
+              {
+                  id: nuevaSala.numero, 
+                  sala: nuevaSala.numero, 
+                  tipo: nuevaSala.tipo
+              }
+          ]);
+          reset(); // Limpia el formulario después de agregar
+      } catch (error) {
+          setError(error.message);
+          console.log(error);
       }
-    };
+  };
   
-    const handleDelete = (id) => {
-      setItems(items.filter(item => item.id !== id))
+  const handleDelete = async (numeroSala) => {
+    try {
+        console.log("numero sala", numeroSala);
+        await deleteSala(numeroSala);
+
+        setItems((prevItems) => prevItems.filter((item) => item.sala !== numeroSala));
+    } catch (error) {
+        console.error("Error al eliminar la sala:", error);
+        setError("No se pudo eliminar la sala. Inténtalo nuevamente.");
     }
+};
 
     const handleCancel = () => {
-      window.location.reload();
+      navigate('/');
     }
   
     return (
       <Container className="mt-4">
-        <Row className="mb-4 align-items-end">
-            <Col md={4}>
-                <Form.Group className="mt-3" controlId="formTipo">
-                <Form.Label>Tipo</Form.Label>
-                <Form.Select
-                    value={selectedTipo}
-                    onChange={(e) => setSelectedTipo(e.target.value)}
-                >
-                    <option value="">Seleccione un tipo</option>
-                    <option value="2D">2D</option>
-                    <option value="3D">3D</option>
-                    <option value="HD">HD</option>
-                </Form.Select>
-                </Form.Group>
-            </Col>
-            <Col md={2}>
-                <Button 
-                variant="primary" 
-                onClick={handleAdd}
-                disabled={!selectedTipo}
-                className="w-20 mt-3"> + </Button>
-            </Col>
+            <Row className="mb-4 align-items-end">
+                <Col md={4}>
+                    <Form.Group className="mt-3" controlId="formNumeroSala">
+                        <Form.Label>Numero de Sala</Form.Label>
+                        <Form.Control 
+                            type="number"
+                            placeholder="número sala"
+                            {...register("numeroSala", {
+                                required: "Este campo es obligatorio",
+                                valueAsNumber: true,
+                            })}
+                            isInvalid={!!errors.numeroSala}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.numeroSala && errors.numeroSala.message}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Col>
+                <Col md={4}>
+                    <Form.Group className="mt-3" controlId="formTipo">
+                        <Form.Label>Tipo</Form.Label>
+                        <Form.Select 
+                            {...register("tipo", { required: "Este campo es obligatorio" })}
+                            isInvalid={!!errors.tipo}
+                        >
+                            <option value="">Seleccione un tipo</option>
+                            <option value="2D">2D</option>
+                            <option value="3D">3D</option>
+                            <option value="4D">4D</option>
+                        </Form.Select>
+                        <Form.Control.Feedback type="invalid">
+                            {errors.tipo && errors.tipo.message}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                </Col>
+                <Col md={2}>
+                    <Button 
+                        variant="primary" 
+                        onClick={handleSubmit(onSubmit)} // Usa handleSubmit con la función onSubmit
+                        disabled={!!errors.tipo || !!errors.numeroSala}
+                        className="w-20 mt-3"> + </Button>
+                </Col>
             </Row>
     
             <Table bordered hover>
-            <thead className="bg-light">
-                <tr>
-                <th>Sala</th>
-                <th>Tipo</th>
-                <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                {items.map((item) => (
-                <tr key={item.id}>
-                    <td>{item.sala}</td>
-                    <td>{item.tipo}</td>
-                    <td className="text-center">
-                    <Button 
-                        variant="link" 
-                        className="text-danger p-0" 
-                        onClick={() => handleDelete(item.id)}
-                    >
-                        <Trash2 size={20} />
-                    </Button>
-                    </td>
-                </tr>
-                ))}
-            </tbody>
-        </Table>
+                <thead className="bg-light">
+                    <tr>
+                        <th>Sala</th>
+                        <th>Tipo</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {items.map((item) => (
+                        <tr key={item.id}>
+                            <td>{item.sala}</td>
+                            <td>{item.tipo}</td>
+                            <td className="text-center">
+                                <Button 
+                                    variant="link" 
+                                    className="text-danger p-0" 
+                                    onClick={() => handleDelete(item.sala)}
+                                >
+                                    <Trash2 size={20} />
+                                </Button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </Table>
 
-        <div className="d-flex justify-content-end gap-2">
-            <GuardarBtn/>
-            <CancelarBtn onClick={handleCancel}/>
-        </div>
-      </Container>
+            <div className="d-flex justify-content-end gap-2">
+                <GuardarBtn/>
+                <CancelarBtn onClick={handleCancel}/>
+            </div>
+        </Container>
     )
 }
 

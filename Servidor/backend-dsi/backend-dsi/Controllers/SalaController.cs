@@ -50,9 +50,9 @@ namespace backend_dsi.Controllers
 
         // DELETE: SalaController/eliminarSala/5
         [HttpDelete("eliminarSala")]
-        public async Task<ActionResult<RespuestaPrivada<Sala>>> eliminarSala(int id)
+        public async Task<ActionResult<RespuestaPrivada<Sala>>> eliminarSala(int numeroSala)
         {
-            var respuesta = await _service.DeleteSala(id);
+            var respuesta = await _service.DeleteSala(numeroSala);
             if (respuesta.Datos == null)
             {
                 if (respuesta.Mensaje.StartsWith("Error interno"))

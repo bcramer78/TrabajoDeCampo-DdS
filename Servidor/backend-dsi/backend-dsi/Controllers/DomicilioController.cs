@@ -80,5 +80,21 @@ namespace backend_dsi.Controllers
             return Ok(respuesta);
         }
 
+        // GET: DomicilioController
+        [HttpGet("obtenerDomicilioId")]
+        public async Task<ActionResult<RespuestaPrivada<int>>> obtenerDomicilioId(int calle, int numero)
+        {
+            var respuesta = await _service.GetDomicilioId(calle ,numero);
+            if (respuesta.Datos == 0)
+            {
+                if (respuesta.Mensaje.StartsWith("Error interno"))
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, respuesta);
+                }
+                return BadRequest(respuesta);
+            }
+            return Ok(respuesta);
+        }
+
     }
 }

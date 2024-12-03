@@ -11,15 +11,16 @@ export async function createDomicilio(nuevoDomicilio) {
     }
 };
 
-// GET
-export async function getDomicilios() {
+// GET: Obtener ID del domicilio
+export async function obtenerDomicilioId(calle, numero) { 
     try {
-        const response = await axios.get("https://localhost:7297/api/Localidad/obtenerLocalidades");
+        const response = await axios.get(`https://localhost:7297/api/Domicilio/obtenerDomicilioId?calle=${calle}&numero=${numero}`);
         return response;
     } catch (error) {
-        console.log(error.response);
+        console.log("Este es el error al obtener el domicilio: ", error.response.data.mensaje);
         throw new Error(error.response.data.mensaje);
     }
-}
+};
+
 
 

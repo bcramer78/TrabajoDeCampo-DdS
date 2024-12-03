@@ -9,5 +9,6 @@ namespace Servicios.Interfaces
         Task<RespuestaPrivada<CineDTO>> PostCine(CineDTO cineDTO);
         Task<RespuestaPrivada<Cine>> DeleteCine(int id);
         Task<RespuestaPrivada<CineDTO>> PutCine(int id, CineDTO cineDTO);
+        Task<RespuestaPrivada<int>> GetCineIdByNombre(string nombre);
     }
 }

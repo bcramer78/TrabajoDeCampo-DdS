@@ -80,5 +80,21 @@ namespace backend_dsi.Controllers
             }
             return Ok(respuesta);
         }
+
+        // GET: DomicilioController
+        [HttpGet("obtenerCineId")]
+        public async Task<ActionResult<RespuestaPrivada<int>>> obtenerCineId(string nombre)
+        {
+            var respuesta = await _service.GetCineIdByNombre(nombre);
+            if (respuesta.Datos == 0)
+            {
+                if (respuesta.Mensaje.StartsWith("Error interno"))
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, respuesta);
+                }
+                return BadRequest(respuesta);
+            }
+            return Ok(respuesta);
+        }
     }
 }
