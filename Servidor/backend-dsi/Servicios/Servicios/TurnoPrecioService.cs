@@ -57,9 +57,9 @@ namespace Servicios.Servicios
         }
 
         //alta
-        public async Task<RespuestaPrivada<TurnoPrecioDTO>> PostTurnoPrecio(TurnoPrecioDTO turnoPrecioDTO)
+        public async Task<RespuestaPrivada<TurnoPrecioDTOConId>> PostTurnoPrecio(TurnoPrecioDTO turnoPrecioDTO)
         {
-            var respuesta = new RespuestaPrivada<TurnoPrecioDTO>();
+            var respuesta = new RespuestaPrivada<TurnoPrecioDTOConId>();
             respuesta.Datos = null;
 
             try
@@ -89,7 +89,7 @@ namespace Servicios.Servicios
                 await _context.SaveChangesAsync();
                 respuesta.Exito = true;
                 respuesta.Mensaje = "El turnoPrecio se ha creado correctamente";
-                respuesta.Datos = turnoPrecioNuevo.Adapt<TurnoPrecioDTO>();
+                respuesta.Datos = turnoPrecioNuevo.Adapt<TurnoPrecioDTOConId>();
                 return (respuesta);
             }
             catch (Exception ex)

@@ -3,24 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{85FBA734-8596-4C9D-A000-EDEA8A8D8C11}|backend-dsi\\backend-dsi.csproj|c:\\users\\usuario\\source\\repos\\gitbackenddsi\\trabajodecampo-dds\\servidor\\backend-dsi\\backend-dsi\\controllers\\salacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85FBA734-8596-4C9D-A000-EDEA8A8D8C11}|backend-dsi\\backend-dsi.csproj|solutionrelative:backend-dsi\\controllers\\salacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{5D0C7475-9956-49D4-AEB9-995412F9EF5E}|Servicios\\Servicios.csproj|c:\\users\\usuario\\source\\repos\\gitbackenddsi\\trabajodecampo-dds\\servidor\\backend-dsi\\servicios\\servicios\\salaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D0C7475-9956-49D4-AEB9-995412F9EF5E}|Servicios\\Servicios.csproj|solutionrelative:servicios\\servicios\\salaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{85FBA734-8596-4C9D-A000-EDEA8A8D8C11}|backend-dsi\\backend-dsi.csproj|c:\\users\\usuario\\source\\repos\\gitbackenddsi\\trabajodecampo-dds\\servidor\\backend-dsi\\backend-dsi\\controllers\\cinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{85FBA734-8596-4C9D-A000-EDEA8A8D8C11}|backend-dsi\\backend-dsi.csproj|solutionrelative:backend-dsi\\controllers\\cinecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{5D0C7475-9956-49D4-AEB9-995412F9EF5E}|Servicios\\Servicios.csproj|c:\\users\\usuario\\source\\repos\\gitbackenddsi\\trabajodecampo-dds\\servidor\\backend-dsi\\servicios\\servicios\\cineservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{5D0C7475-9956-49D4-AEB9-995412F9EF5E}|Servicios\\Servicios.csproj|solutionrelative:servicios\\servicios\\cineservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{5D0C7475-9956-49D4-AEB9-995412F9EF5E}|Servicios\\Servicios.csproj|c:\\users\\usuario\\source\\repos\\gitbackenddsi\\trabajodecampo-dds\\servidor\\backend-dsi\\servicios\\interfaces\\icineservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{5D0C7475-9956-49D4-AEB9-995412F9EF5E}|Servicios\\Servicios.csproj|solutionrelative:servicios\\interfaces\\icineservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{85FBA734-8596-4C9D-A000-EDEA8A8D8C11}|backend-dsi\\backend-dsi.csproj|c:\\users\\usuario\\source\\repos\\gitbackenddsi\\trabajodecampo-dds\\servidor\\backend-dsi\\backend-dsi\\controllers\\turnopreciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{85FBA734-8596-4C9D-A000-EDEA8A8D8C11}|backend-dsi\\backend-dsi.csproj|solutionrelative:backend-dsi\\controllers\\turnopreciocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D0C7475-9956-49D4-AEB9-995412F9EF5E}|Servicios\\Servicios.csproj|c:\\users\\usuario\\source\\repos\\gitbackenddsi\\trabajodecampo-dds\\servidor\\backend-dsi\\servicios\\servicios\\turnoprecioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D0C7475-9956-49D4-AEB9-995412F9EF5E}|Servicios\\Servicios.csproj|solutionrelative:servicios\\servicios\\turnoprecioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5D0C7475-9956-49D4-AEB9-995412F9EF5E}|Servicios\\Servicios.csproj|c:\\users\\usuario\\source\\repos\\gitbackenddsi\\trabajodecampo-dds\\servidor\\backend-dsi\\servicios\\interfaces\\iturnoprecioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5D0C7475-9956-49D4-AEB9-995412F9EF5E}|Servicios\\Servicios.csproj|solutionrelative:servicios\\interfaces\\iturnoprecioservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -39,66 +35,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SalaController.cs",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\backend-dsi\\Controllers\\SalaController.cs",
-              "RelativeDocumentMoniker": "backend-dsi\\Controllers\\SalaController.cs",
-              "ToolTip": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\backend-dsi\\Controllers\\SalaController.cs",
-              "RelativeToolTip": "backend-dsi\\Controllers\\SalaController.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAgwDYAAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T19:26:10.328Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SalaService.cs",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Servicios\\SalaService.cs",
-              "RelativeDocumentMoniker": "Servicios\\Servicios\\SalaService.cs",
-              "ToolTip": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Servicios\\SalaService.cs",
-              "RelativeToolTip": "Servicios\\Servicios\\SalaService.cs",
-              "ViewState": "AgIAAF0AAAAAAAAAAAAowGYAAABjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T19:24:12.888Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CineController.cs",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\backend-dsi\\Controllers\\CineController.cs",
-              "RelativeDocumentMoniker": "backend-dsi\\Controllers\\CineController.cs",
-              "ToolTip": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\backend-dsi\\Controllers\\CineController.cs",
-              "RelativeToolTip": "backend-dsi\\Controllers\\CineController.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAmwFcAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T17:35:19.5Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ICineService.cs",
-              "DocumentMoniker": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Interfaces\\ICineService.cs",
-              "RelativeDocumentMoniker": "Servicios\\Interfaces\\ICineService.cs",
-              "ToolTip": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Interfaces\\ICineService.cs",
-              "RelativeToolTip": "Servicios\\Interfaces\\ICineService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T17:34:26.278Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "CineService.cs",
               "DocumentMoniker": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Servicios\\CineService.cs",
               "RelativeDocumentMoniker": "Servicios\\Servicios\\CineService.cs",
               "ToolTip": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Servicios\\CineService.cs",
               "RelativeToolTip": "Servicios\\Servicios\\CineService.cs",
-              "ViewState": "AgIAAMEAAAAAAAAAAAAuwMwAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAKEAAAAAAAAAAAAAwLAAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T17:28:37.89Z",
+              "WhenOpened": "2024-12-04T13:21:40.258Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TurnoPrecioController.cs",
+              "DocumentMoniker": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\backend-dsi\\Controllers\\TurnoPrecioController.cs",
+              "RelativeDocumentMoniker": "backend-dsi\\Controllers\\TurnoPrecioController.cs",
+              "ToolTip": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\backend-dsi\\Controllers\\TurnoPrecioController.cs",
+              "RelativeToolTip": "backend-dsi\\Controllers\\TurnoPrecioController.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAowCQAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T12:13:18.048Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ITurnoPrecioService.cs",
+              "DocumentMoniker": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Interfaces\\ITurnoPrecioService.cs",
+              "RelativeDocumentMoniker": "Servicios\\Interfaces\\ITurnoPrecioService.cs",
+              "ToolTip": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Interfaces\\ITurnoPrecioService.cs",
+              "RelativeToolTip": "Servicios\\Interfaces\\ITurnoPrecioService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T12:11:20.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TurnoPrecioService.cs",
+              "DocumentMoniker": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Servicios\\TurnoPrecioService.cs",
+              "RelativeDocumentMoniker": "Servicios\\Servicios\\TurnoPrecioService.cs",
+              "ToolTip": "C:\\Users\\USUARIO\\source\\repos\\gitBackendDSI\\TrabajoDeCampo-DdS\\Servidor\\backend-dsi\\Servicios\\Servicios\\TurnoPrecioService.cs",
+              "RelativeToolTip": "Servicios\\Servicios\\TurnoPrecioService.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAwwFsAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T12:10:57.416Z",
               "EditorCaption": ""
             }
           ]

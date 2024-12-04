@@ -34,7 +34,7 @@ namespace backend_dsi.Controllers
 
         // POST: TurnoPrecioController
         [HttpPost("crearTurnoPrecio")]
-        public async Task<ActionResult<RespuestaPrivada<TurnoPrecioDTO>>> crearTurnoPrecio(TurnoPrecioDTO turnoPrecioDTO)
+        public async Task<ActionResult<RespuestaPrivada<TurnoPrecioDTOConId>>> crearTurnoPrecio(TurnoPrecioDTO turnoPrecioDTO)
         {
             var respuesta = await _service.PostTurnoPrecio(turnoPrecioDTO);
             if (respuesta.Datos == null)

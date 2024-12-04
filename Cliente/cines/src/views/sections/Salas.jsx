@@ -9,11 +9,10 @@ import { createSala, deleteSala } from '../../helpers/sala/salaService'
 
 const Salas = ({cineId}) => {
     const [error, setError] = useState('');
-    const [selectedTipo, setSelectedTipo] = useState('')
     const [items, setItems] = useState([])
-    const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, setValue, formState: { errors }, getValues, watch } = useForm();
     const navigate = useNavigate();
-  
+
     const onSubmit = async (data) => {
     
       const numeroSala = parseInt(data.numeroSala, 10);
@@ -59,6 +58,16 @@ const Salas = ({cineId}) => {
     const handleCancel = () => {
       navigate('/');
     }
+
+    const isFormValid = () => {
+        const numeroSala = watch("numeroSala"); 
+        const tipo = watch("tipo"); 
+        return cineId && numeroSala && tipo;  
+    };
+
+    const handleGuardar = () => {
+        navigate('/');
+    }
   
     return (
       <Container className="mt-4">
@@ -100,8 +109,8 @@ const Salas = ({cineId}) => {
                 <Col md={2}>
                     <Button 
                         variant="primary" 
-                        onClick={handleSubmit(onSubmit)} // Usa handleSubmit con la función onSubmit
-                        disabled={!!errors.tipo || !!errors.numeroSala}
+                        onClick={handleSubmit(onSubmit)} 
+                        disabled={!isFormValid() }
                         className="w-20 mt-3"> + </Button>
                 </Col>
             </Row>
@@ -134,7 +143,9 @@ const Salas = ({cineId}) => {
             </Table>
 
             <div className="d-flex justify-content-end gap-2">
-                <GuardarBtn/>
+                <Button variant="primary" onClick={handleGuardar} disabled={!cineId} >
+                    Guardar
+                </Button>
                 <CancelarBtn onClick={handleCancel}/>
             </div>
         </Container>

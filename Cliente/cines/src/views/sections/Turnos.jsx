@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Form, Container, Row, Col, Table, Button } from 'react-bootstrap'
+import { Form, Container, Row, Col, Table, Button, Alert } from 'react-bootstrap'
 import { Trash2 } from 'lucide-react'
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
 import { useNavigate} from 'react-router-dom';
 import { getTurnos } from '../../helpers/turno/turnoService'
 import { useForm } from "react-hook-form";
+import { createTurnoPrecio, deleteTurnoPrecio } from '../../helpers/turnoPrecio/turnoPrecioService'
 
 const Turnos = ({cineId}) => {
     const [turnos, setTurnos] = useState([]);
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const [selectedTurno, setSelectedTurno] = useState('')
     const [precio, setPrecio] = useState('')
     const [items, setItems] = useState([])
@@ -32,25 +34,50 @@ const Turnos = ({cineId}) => {
       ObtenerTurnos();
     }, []);
   
-    const handleAdd = () => {
+    const handleAdd = async () => {
       if (selectedTurno && precio) {
         const turnoSeleccionado = turnos.find(turno => String(turno.id) === selectedTurno);
-        setItems([
-          ...items,
-          {
-            id: turnoSeleccionado.id,
-            turno: turnoSeleccionado.tipo,
-            precio: precio
-          }
-        ])
-        setSelectedTurno('')
-        setPrecio('')
+
+        const nuevoTurnoPrecio = {
+          turnoId: turnoSeleccionado.id,
+          precio: Number(precio),
+          cineId: Number(cineId),
+        };
+
+        try {
+
+          const response = await createTurnoPrecio(nuevoTurnoPrecio);
+          const turnoPrecioCreado = response.data.datos;
+          setItems([
+            ...items,
+            {
+              id: turnoPrecioCreado.id,
+              turno: turnoSeleccionado.tipo,
+              precio: precio
+            }
+          ])
+          setSelectedTurno('')
+          setPrecio('')
+          setSuccess("TurnoPrecio agregado correctamente.");
+          
+        } catch (error) {
+          setError(error.message || "Error al agregar el turno y precio.");
+        }
+
+        
       }
     }
   
-    const handleDelete = (id) => {
-      setItems(items.filter(item => item.id !== id))
-    }
+    const handleDelete = async (id) => {
+      try {
+          await deleteTurnoPrecio(id); // Eliminar en el backend por ID
+
+          setItems(items.filter((item) => item.id !== id)); // Eliminar de la grilla
+          setSuccess("TurnoPrecio eliminado correctamente.");
+      } catch (error) {
+          setError(error.message || "Error al eliminar el turno y precio.");
+      }
+  };
 
     
     const navigate = useNavigate();
@@ -60,8 +87,12 @@ const Turnos = ({cineId}) => {
     };
 
     const handleCancel = () => {
-      window.location.reload();
+      navigate('/'); 
     }
+
+    const handleGuardar = () => {
+      navigate('/');
+  }
 
     return (
         <Container className="mt-4">
@@ -106,7 +137,7 @@ const Turnos = ({cineId}) => {
               <Button 
                 variant="primary" 
                 onClick={handleAdd}
-                disabled={!selectedTurno || !precio}
+                disabled={!selectedTurno || !precio || !cineId}
                 className="w-20 mt-3"
               > + </Button>
             </Col>
@@ -140,7 +171,9 @@ const Turnos = ({cineId}) => {
           </Table>
 
           <div className="d-flex justify-content-end gap-2">
-            <GuardarBtn/>
+            <Button variant="primary" onClick={handleGuardar} disabled={!cineId} >
+                Guardar
+            </Button>
             <CancelarBtn onClick={handleCancel}/>
           </div>
         </Container>

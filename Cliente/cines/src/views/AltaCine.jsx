@@ -7,11 +7,9 @@ import Salas from './sections/Salas';
 import Turnos from './sections/Turnos';
 
 function AltaCine() {
-  const [activeTab, setActiveTab] = useState("domicilio");
+  const [activeTab, setActiveTab] = useState("home");
   const [domicilioId, setDomicilioId] = useState(null);
   const [cineId, setCineId] = useState(null);
-  const [domicilioGuardado, setDomicilioGuardado] = useState(false);
-  const [cineGuardado, setCineGuardado] = useState(false);
   const [cineData, setCineData] = useState({
     nombre: '',
     numero: '',
@@ -19,13 +17,11 @@ function AltaCine() {
   });
 
   const handleGuardarCine = (data) => {
-    setCineGuardado(true);
     setCineData(data); 
     setActiveTab("salas"); 
   };
 
   const handleGuardarDomicilio = () => {
-    setDomicilioGuardado(true); 
     setActiveTab("home"); 
   };
 
@@ -36,16 +32,16 @@ function AltaCine() {
           id="noanim-tab-example"
           className="mb-3"
         >
-            <Tab eventKey="home" title="Cine" disabled={!domicilioGuardado}>
+            <Tab eventKey="home" title="Cine">
               <Cine onGuardar={handleGuardarCine} cineData={cineData} setCineData={setCineData} domicilioId={domicilioId} setCineId={setCineId}/>
             </Tab>
             <Tab eventKey="domicilio" title="Domicilio">
               <Domicilio onGuardar={handleGuardarDomicilio} setDomicilioId={setDomicilioId}/>
             </Tab>
-            <Tab eventKey="salas" title="Salas" disabled={!cineGuardado} >
+            <Tab eventKey="salas" title="Salas">
             <Salas cineId={cineId}/>
             </Tab>
-            <Tab eventKey="turnos" title="Turnos" disabled={!cineGuardado} >
+            <Tab eventKey="turnos" title="Turnos">
               <Turnos cineId={cineId}/>
             </Tab>
         </Tabs>

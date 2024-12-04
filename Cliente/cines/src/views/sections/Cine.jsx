@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import { Form, Button, Container, Row, Col, Alert } from 'react-bootstrap'
 import CancelarBtn from '../../components/buttons/CancelarBtn';
 import GuardarBtn from '../../components/buttons/GuardarBtn';
 import { useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import { createCine, obtenerCineId } from '../../helpers/cine/cineService'
 
 const Cine = ({ cineData, setCineData, onGuardar, domicilioId, setCineId }) =>{
     const navigate = useNavigate();
+    const [error, setError] = useState('');
     console.log("Estoy en la seccion cine, id del domicilio: ", domicilioId);
 
     const handleCancel = () => {
@@ -34,7 +35,7 @@ const Cine = ({ cineData, setCineData, onGuardar, domicilioId, setCineId }) =>{
                 onGuardar(cineData); 
             } catch (error) {
                 console.error('Error al crear el cine:', error);
-                alert('Hubo un error al guardar el cine');
+                setError('El número de cine ya está registrado');
             }
 
              
@@ -50,6 +51,11 @@ const Cine = ({ cineData, setCineData, onGuardar, domicilioId, setCineId }) =>{
 
     return (
         <Container className="mt-4">
+            {error && (
+                <Alert variant="danger">
+                    {error}
+                </Alert>
+            )}
         <Form>
             <Row className="mb-3">
                 <Col md={6}>
@@ -84,7 +90,7 @@ const Cine = ({ cineData, setCineData, onGuardar, domicilioId, setCineId }) =>{
             </Form.Group>
 
             <div className="d-flex justify-content-end gap-2">
-                <Button variant="primary" onClick={handleGuardar}>
+                <Button variant="primary" onClick={handleGuardar} disabled={!domicilioId} >
                     Guardar
                 </Button>
                 <CancelarBtn onClick={handleCancel}/>
